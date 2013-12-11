@@ -35,6 +35,6 @@
 	background: linear-gradient(to bottom,  #ff3019 0%,#cf0404 100%); 
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 );
 }
-#message p {
+p#successMessage, p#errorMessage {
 	font-size: 30px;
 }

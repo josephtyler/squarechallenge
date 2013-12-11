@@ -73,11 +73,12 @@ $(function(){
       var selectedSquares = window.App.squares.where( { selected: true } );
       var total = Math.round( window.App.config.rows * window.App.config.cols * window.App.config.hotRatio );
       if ( selectedSquares.length >= total ) {
-        window.App.appView.successMessage( 'You won! Click "Reset" to play again.' );
+        window.App.appView.successMessage();
+				window.App.appView.freezeBoard();
       } 
     },
     youLost: function() {
-      window.App.appView.errorMessage( 'Boohoo! Click "Reset" to play again.' );
+      window.App.appView.errorMessage();
       window.App.appView.freezeBoard();
     },
     changeHighlight: function() {
@@ -246,20 +247,23 @@ $(function(){
      * Show a success message
      */
     successMessage: function( message ) {
-      $("#message").html('<p class="text-success">'+message+'</p>').show();
+			this.clearMessages();
+      $("#successMessage").show();
     },
     /* 
      * Show an error message
      */
     errorMessage: function( message ) {
-      $("#message").html('<p class="text-danger">'+message+'</p>').show();
+			this.clearMessages();
+      $("#errorMessage").show();
     },
     /*
      * Clear all messages
      */
     clearMessages: function()
     {
-      $("#message").html('').hide();
+      $("#successMessage").hide();
+			$("#errorMessage").hide();
     }
   });
 });
