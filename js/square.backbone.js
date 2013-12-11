@@ -77,7 +77,7 @@ $(function(){
       } 
     },
     youLost: function() {
-      window.App.appView.errorMessage( 'You lost! Click "Reset" to play again.' );
+      window.App.appView.errorMessage( 'Boohoo! Click "Reset" to play again.' );
       window.App.appView.freezeBoard();
     },
     changeHighlight: function() {
