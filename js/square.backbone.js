@@ -32,10 +32,11 @@ $(function(){
       var m = this;
       window.App.appView.freezeBoard();
       // Set a 5 second delay to unhighlight the chosen square
-      setTimeout( function() { 
+      var timeoutId = setTimeout( function() { 
         m.set( { highlight: false } ); 
         window.App.appView.unfreezeBoard();
       }, 5000 );
+			window.App.timeouts.push( timeoutId );
     }
   });
 
@@ -58,7 +59,7 @@ $(function(){
     },
     selectSquare: function( e ) {
       if ( this.model.isSelected() || window.App.appView.frozenBoard ) {
-        return;
+      	return; 
       }
       if ( this.model.isHot() ) {
         this.$el.addClass( "selected" );
@@ -163,10 +164,21 @@ $(function(){
      */
     resetGame: function() {
       window.App.squares.reset();
+			this.clearTimeouts(); // Clear timeouts from any previous boards
       this.buildGame();
       this.startGame();
       this.clearMessages();
     },
+		/*
+ 	 	 * Clear stored timeouts
+		 */
+		clearTimeouts: function() 
+		{
+			for ( var i = 0; i <= window.App.timeouts.length + 1; i++ ) {
+				clearTimeout( window.App.timeouts[i] );
+				delete window.App.timeouts[i];
+			}
+		},
     /*
      * Freeze the board so no selections can be made
      * The square view checks to see if the board is frozen before it
